@@ -1,18 +1,47 @@
+<!-- Ratings -->
+
 <div class="booyah-box col-10 offset-1">
-  <h1><%= @place.name %></h1>
-  <i><%= @place.address %></i>
-  <br/><br/>
-  <p><%= @place.description %></p>
+  <div class="row placeInfo">
+    <div class="col-6">
+      <h1><%= @place.name %></h1>
+      <i><%= @place.address %></i>
+      <br/><br/>
+      <p><%= @place.description %></p>
+    </div>
+    <div id="map" class="col-6"></div>
+    <!-- Show Edit and Delete Buttons -->
+    <div class="float-left">
+      <% if current_user && current_user == @place.user %>
+      <%= link_to 'Edit', edit_place_path(@place), class: 'btn btn-primary' %>
+      <%= link_to 'Delete', place_path(@place), method: :delete, data: {confirm: 'Are you sure you want to delete this?'}, class: 'btn btn-danger' %>
+      <% end %>
+    </div><!-- End Show Edit and Delete Buttons -->
+  </div><!-- End row and placeInfo -->
+
+    
+  
+
+<br />
+<br />
 
 
-  <% @place.photos.each do |photo| %>
-  <div>
+<!-- Show Photos -->
+  <div class="row">
+    <% @place.photos.each do |photo| %>
+
+    <div class="col-lg-4 col-sm-6">
+      <div class="thumbnail">
         <%= image_tag photo.picture %>
-        <%= photo.caption %>
-  </div>
+        <!-- <%= photo.caption %> -->
+      </div>
+    </div>
+ 
   <% end %>
+<!-- End Show Photos -->
+ </div> 
 
 
+<!-- Show Map -->
   <% if @place.latitude.present? && @place.longitude.present? %>  
     <script>
 
@@ -35,34 +64,44 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcLmsC3uKf0axJ5acZFibFp4Drk0p8AM4&callback=initMap">
     </script>
- 
-  <div id="map"></div>
+   
 <% end %>
+<!-- End Show Map -->
 
-<br />
-
-  <div class="float-right">
-    <% if current_user && current_user == @place.user %>
-    <%= link_to 'Edit', edit_place_path(@place), class: 'btn btn-primary' %>
-    <%= link_to 'Delete', place_path(@place), method: :delete, data: {confirm: 'Are you sure you want to delete this?'}, class: 'btn btn-danger' %>
-    <% end %>
+<!-- Show Add Photo Button -->
+  <div>
+    <!-- Buttton trigger modal -->
+    <button type="button" class="btn btn-primary btn-lg float-right" data-toggle="modal" data-target="#myModalPhoto">
+      Add a Photo
+    </button>
   </div>
+<!-- End Show Add Photo Button -->
+
+
+
 </div>
 
+<br />
+<hr>
 
 
-<div class="col-10 offset-1">
-<h1 class="float-left">Comments</h1>
+  
+
+<!-- Show Comment Button -->
+<div class="row">
+<h1 class="col-10 float-left">Comments</h1>
 <!-- Buttton trigger modal -->
-<button type="button" class="btn btn-primary btn-lg float-right" data-toggle="modal" data-target="#myModal">
+<div class="col-10">
+<button type="button" class=" btn btn-primary btn-lg float-right" data-toggle="modal" data-target="#myModal">
   Add a comment
 </button>
 </div>
-
+</div>
+<!-- End Show Comment Button -->
 
 <div class="clear"></div>
 
-
+<!-- Show Comments -->
 <div class="row">
 <% @place.comments.each do |comment| %>
   <div class="col-12 col-sm-6">
@@ -76,14 +115,20 @@
   </div>
   <% end %>
 </div>
+<!-- End Show Comments -->
 
+
+
+<!--
 <%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
   <%= f.input :picture %>
   <%= f.input :caption %>
   <%= f.submit "Add a Photo", class: 'btn btn-primary' %>
 <% end %>
+-->
 
-<!-- Modal -->
+
+<!-- Modal For Comment -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -108,4 +153,31 @@
     </div>
   </div>
 </div>
+<!-- End Modal For Comment-->
 
+<!-- Modal Photo Upload -->
+<div class="modal fade" id="myModalPhoto" tabindex="-1" role="dialog" aria-labelledby="myModalLabelPhoto" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabelPhoto">Add a photo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
+        <div class="modal-body">
+        
+          <%= f.input :picture %>
+          <%= f.input :caption %>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit "Add a Photo", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- End Modal Photo Upload-->
