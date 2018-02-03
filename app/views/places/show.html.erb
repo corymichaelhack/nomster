@@ -118,16 +118,6 @@
 <!-- End Show Comments -->
 
 
-
-<!--
-<%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
-  <%= f.input :picture %>
-  <%= f.input :caption %>
-  <%= f.submit "Add a Photo", class: 'btn btn-primary' %>
-<% end %>
--->
-
-
 <!-- Modal For Comment -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -141,7 +131,7 @@
       <%= simple_form_for @comment, url: place_comments_path(@place) do |f| %>
         <div class="modal-body">
         
-          <%= f.input :message %>
+          <%= f.input :message, required: true %>
           <%= f.input :rating, as: :select, collection: Comment::RATINGS %>
 
         </div>
@@ -168,7 +158,7 @@
       <%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
         <div class="modal-body">
         
-          <%= f.input :picture %>
+          <%= f.input :picture, required: true %>
           <%= f.input :caption %>
 
         </div>
