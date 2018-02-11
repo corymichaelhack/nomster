@@ -15,14 +15,14 @@
     <div class="carousel-item">
       <%= image_tag 'slider2.jpeg', class: 'd-block img-fluid' %>
       <div class="carousel-caption d-none d-md-block">
-      <h3>Looking for something fancy?</h3>
+      <h3>Mexican warps anyone?</h3>
     </div>
     </div>
 
     <div class="carousel-item">
       <%= image_tag 'slider3.jpeg', class: 'd-block img-fluid' %>
       <div class="carousel-caption d-none d-md-block">
-      <h3>In the mood for some sushi?</h3>
+      <h3>In the mood for something fancy?</h3>
     </div>
     </div>
   </div>
@@ -46,12 +46,16 @@
     <p><%= place.description %></p>
 
 <!-- Show Photos -->
-  <% place.photos.each do |photo| %>
-  <div>
+<div class="row">
+  <% place.index_photos.each do |photo| %>
+  <div class="col-lg-4 col-sm-6">
+    <div class="thumbnail">
         <%= image_tag photo.picture %>
+    </div>
         <%= photo.caption %>
   </div> 
   <% end %>
+</div>
 <!-- End Show Photos -->
 
 

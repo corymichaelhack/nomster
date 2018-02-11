@@ -24,9 +24,10 @@
 <br />
 <br />
 
-
+<div class="row">
+<h1 class="col-10 float-left offset-1">Photos</h1>
 <!-- Show Photos -->
-  <div class="row">
+  
     <% @place.photos.each do |photo| %>
 
     <div class="col-lg-4 col-sm-6">
@@ -68,6 +69,7 @@
 <% end %>
 <!-- End Show Map -->
 
+
 <!-- Show Add Photo Button -->
   <div>
     <!-- Buttton trigger modal -->
@@ -89,7 +91,7 @@
 
 <!-- Show Comment Button -->
 <div class="row">
-<h1 class="col-10 float-left">Comments</h1>
+<h1 class="col-10 float-left offset-1">Comments</h1>
 <!-- Buttton trigger modal -->
 <div class="col-10">
 <button type="button" class=" btn btn-primary btn-lg float-right" data-toggle="modal" data-target="#myModal">

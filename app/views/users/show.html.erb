@@ -1,11 +1,11 @@
 <div class="booyah-box">
   <div class="row">
-    <div class="col-4">
-  <%= image_tag 'user.png' %>
-    </div>
+      <div class="col-lg-4 col-sm-6 text-center">
+        <%= image_tag 'user.png' %>
+      </div>
 
-    <div class="col-8">
-  <h1><%= @user.email %></h1>
+    <div class="col-lg-8 col-sm-6 text-center">
+  <h2><%= @user.email %></h2>
   <h3>Member Since: <%= @user.created_at.strftime("%B %d, %Y") %></h3>
 
   <h4>Number of comments: <%= @user.comments.count %></h4>

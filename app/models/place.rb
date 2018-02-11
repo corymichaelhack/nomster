@@ -4,10 +4,15 @@ class Place < ApplicationRecord
   has_many :photos
 
 
+
   geocoded_by :address
   after_validation :geocode
 
   validates :name, presence: true, length: { minimum: 3 }
   validates :address, presence: true
   validates :description, presence: true
+
+  def index_photos
+    self.photos.limit(2)
+  end
 end
